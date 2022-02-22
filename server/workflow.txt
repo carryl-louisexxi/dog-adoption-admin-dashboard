@@ -1,0 +1,38 @@
+// setup app 
+// set up .env
+// connect to the port 
+// set up router and controller 
+// connect to the database
+// create database: model schema
+// if our form data have files then we need to
+    accept it using the multer package
+    to install: npm install --save multer 
+    create other folder named middleware/multer.js
+    configure the "storage: where the files is save" and "filefilter: which files is accepted for saving" 
+    export multer.js to router.js 
+    add it after the route "ex. /add"
+    note. multer is a callback function
+// validate incoming text file using the express-validator before creating the element in the collection
+// require morgan middleware : so we see who's trying to connect to the app
+// create error middleware to handle all the errors that happened in the server 
+
+try: catch
+    try { // this is needed to catch errors from code as well as from the database
+        const file = req.file // returned callback of the multer is now in the req.file
+        const {name, age, gender, color, tags, slug} = req.body // destructor the req sent 
+        const Dog = new dogSchema({name, age, gender, color, tags, slug}) // create new instance of the Dog Schema Model    
+        await Dog.save().then(result => res.json(result)) 
+    } catch (error) {
+        next(error) // send the result to the next middleware
+    }
+
+express-async-error 
+    if you don't want to use the try and catch block we could use this package
+    to directly catch errors
+
+errors that are catch are still handle by the error middleware that we created
+
+note: await is added before going to database
+
+// store the image file into the cloudinary for hosting images
+    this is similar to the AWS, however this is free.
